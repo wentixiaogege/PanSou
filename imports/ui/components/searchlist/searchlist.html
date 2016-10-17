@@ -1,0 +1,107 @@
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="row">
+      <a ui-sref="shouye" class="navbar-left"><img src="./images/baidu.png" width="120" height="60" style="margin-top: -20px"></a>
+      <div id="custom-search-input">
+
+          <div class="input-group col-md-10">
+              <input type="text" autofocus id="focuseonload" class="  search-query form-control" ng-model="searchlist.query.value" placeholder="Search" ng-keyup="$event.keyCode == 13 && searchlist.submit()" />
+              <span class="input-group-btn">
+                  <button ng-click="searchlist.submit()" class="btn btn-success" type="button">
+                      <span class="glyphicon glyphicon-search"></span>
+                  </button>
+              </span>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <!-- <li><a href="#">+ Adam</a></li>
+              <li><a href="#Mail">Gmail</a></li>
+              <li><a href="#contact">Images</a></li> -->
+              <li><a href="#contact"><i class="fa fa-th"></i></a></li>
+              <li><a href="#contact"><i class="fa fa-bell"></i></a></li>
+              <li><a href="#contact"><i class="fa fa-share-alt"></i></a></li>
+              <li><a href="#"><i class="fa fa-user"></i></a></li>
+            </ul>
+      </div>
+      </div>
+      
+
+    </div>
+  </nav>
+
+<div class="searchlistcontainer">
+
+    <hgroup class="mb20">
+      <h1>Search Results</h1>
+      <h2 class="lead"><strong class="text-danger">{{searchlist.realCount}}</strong> results were found for the search for <strong class="text-danger">{{searchlist.query.value}}</strong></h2>               
+    </hgroup>
+
+    <section class="col-xs-8 col-sm-8 col-md-8 ">
+
+    <!--  <p  ng-if="searchlist.realCount" style="font-size:20px;max-width=200px; word-wrap:break-word;">
+          <font color="red">Pan Sou_问题小哥哥提醒：关键词{{searchlist.query.value}}，未搜到结果！
+          </font>
+     </p>  -->   
+
+    <p ng-if="searchlist.resultsCount">
+      <!-- <p ng-if="searchlist.results.count">  col-md-offset-5-->
+     <!--  <li ng-repeat="item in searchlist.results">{{item.title}}</li>
+      </p> -->
+      <li class="list-group-item list-group-item-success" dir-paginate="item in searchlist.results | itemsPerPage: searchlist.perPage" total-items="searchlist.resultsCount">
+     
+         <article class="search-result row">
+          <div class="col-xs-7 col-sm-7 col-md-7 excerpet">
+            <a href="{{item.link}}" style="font-size:16px;color:#1f4fcd;text-decoration:underline;" target="_blank">{{item.title}}</a>
+              <p style="font-size:14px;max-width=200px; word-wrap:break-word;">{{item.snippet}}</p>
+              <p style="font-size:14px;max-width=200px; word-wrap:break-word;">人工复制后面地址,然后在新的页面打开：
+                <font color="red">{{item.htmllink}}
+                </font>
+              </p>     
+          </div>
+        </article>
+      </li>
+      <dir-pagination-controls on-page-change="searchlist.pageChanged(newPageNumber)"></dir-pagination-controls>
+    </p>
+   </section>
+
+<!-- 
+        <article class="search-result row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/food" alt="Lorem ipsum" /></a>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <ul class="meta-search">
+          <li><i class="glyphicon glyphicon-calendar"></i> <span>02/13/2014</span></li>
+          <li><i class="glyphicon glyphicon-time"></i> <span>8:32 pm</span></li>
+          <li><i class="glyphicon glyphicon-tags"></i> <span>Food</span></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7">
+        <h3><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>            
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+      </div>
+      <span class="clearfix borda"></span>
+    </article> 
+
+  <article class="search-result row">
+      <div class="col-xs-12 col-sm-12 col-md-3">
+        <a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/sports" alt="Lorem ipsum" /></a>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-2">
+        <ul class="meta-search">
+          <li><i class="glyphicon glyphicon-calendar"></i> <span>01/11/2014</span></li>
+          <li><i class="glyphicon glyphicon-time"></i> <span>10:13 am</span></li>
+          <li><i class="glyphicon glyphicon-tags"></i> <span>Sport</span></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7">
+        <h3><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>            
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+      </div>
+      <span class="clearfix border"></span>
+    </article>      --> 
+
+
+</div>
