@@ -3,9 +3,71 @@ import { request } from "meteor/froatsnook:request";
 import { Random } from 'meteor/random'
 // import { Parties } from './collection';
 import { Counts } from 'meteor/tmeasday:publish-counts';
+
+import { $ } from 'jquery';
  
 if (Meteor.isServer) {
    
+  Meteor.publish('googleResultSearch', function(query,start) {
+  console.log("coming googleResultSearch here");
+  
+    var self = this;
+    try {
+
+    var google = require('google');
+    var Agent = require('socks5-https-client/lib/Agent');
+    var cheerio = require('cheerio');
+
+    google.requestOptions = {
+              agentClass: Agent,
+              agentOptions: {
+                  socksHost: 'localhost', // Defaults to 'localhost'.
+                  socksPort: 7890, // Defaults to 1080.
+              },
+              timeout: 30000,
+          }
+
+    google.resultsPerPage = 5;
+    var nextCounter = 0;
+    var match, result = "", regex = /<div class="sd" id="resultStats">(.*?)<\/div>/ig;
+   
+
+    google("site:pan.baidu.com "+query, function (err, res){
+      if (err) console.error(err)
+
+      var reg='<div class="sd" id="resultStats">';
+      // console.log($(res.body).find('resultStats'));
+       while (match = regex.exec(res.body)) { result = match[1]; }
+
+     console.log(result);
+
+      for (var i = 0; i < res.links.length; ++i) {
+        var link = res.links[i];
+        // console.log(link.title + ' - ' + link.href)
+        // console.log(link.description + "\n")
+        var doc = {
+            // thumb: item.imageLinks.smallThumbnail,
+            title: link.title,
+            link: link.href,
+            snippet: link.description,
+            htmllink:link.href,
+            numberOfResults:result
+            
+          };
+          self.added('results', Random.id(), doc);
+      }
+
+      if (nextCounter < 4) {
+        nextCounter += 1
+        console.log("-----------------------"+nextCounter);
+        if (res.next) res.next()
+      }
+    })
+
+    } catch(error) {
+      console.log(error);
+    }
+  });
 
 
   Meteor.publish('bingSearch', function(query,start) {
