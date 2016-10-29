@@ -12,6 +12,10 @@ if (Meteor.isServer) {
   console.log("coming googleResultSearch here");
   
     var self = this;
+    if(query == null || query == ''){
+    self.ready();
+    return;
+  }
     try {
 
     var google = require('google');
@@ -72,6 +76,10 @@ if (Meteor.isServer) {
 
   Meteor.publish('bingSearch', function(query,start) {
   console.log("coming searching here");
+  if(query == null || query == ''){
+    this.ready();
+    return;
+  }
   // console.log('https://www.googleapis.com/customsearch/v1?key=AIzaSyDt08fOrrEJ0Fk_UfV73hZ0fcsi8WObqRk&cx=011952721200530379099:fcu7kak7rc0&num=10&start='+start+'&q='+query);
   url = "https://api.cognitive.microsoft.com/bing/v5.0/search?q="+encodeURI("java编程")+"&count=10&offset=0&mkt=en-us&safesearch=Moderate";
     console.log(url);
@@ -135,6 +143,10 @@ if (Meteor.isServer) {
 
   Meteor.publish('googleSearch', function(query,start) {
   console.log("coming searching here");
+  if(query == null || query == ''){
+    this.ready();
+    return;
+  }
   // console.log('https://www.googleapis.com/customsearch/v1?key=AIzaSyDt08fOrrEJ0Fk_UfV73hZ0fcsi8WObqRk&cx=011952721200530379099:fcu7kak7rc0&num=10&start='+start+'&q='+query);
   // url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyDt08fOrrEJ0Fk_UfV73hZ0fcsi8WObqRk&cx=011952721200530379099:fcu7kak7rc0&num=10&start="+start+"&q="+encodeURI(query);
     url="https://www.googleapis.com/customsearch/v1?key=AIzaSyDt08fOrrEJ0Fk_UfV73hZ0fcsi8WObqRk&rsz=filtered_cse&num=10&hl=zh_CN&prettyPrint=false&source=gcsc&gss=.com&sig=432dd570d1a386253361f581254f9ca1&start="+start+"&cx=011952721200530379099:fcu7kak7rc0&q="+encodeURI(query)+"&sort=&googlehost=www.google.com";
