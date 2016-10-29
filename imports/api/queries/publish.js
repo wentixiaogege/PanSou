@@ -27,7 +27,7 @@ if (Meteor.isServer) {
               timeout: 30000,
           }
 
-    google.resultsPerPage = 5;
+    google.resultsPerPage = 10;
     var nextCounter = 0;
     var match, result = "", regex = /<div class="sd" id="resultStats">(.*?)<\/div>/ig;
    
@@ -52,7 +52,7 @@ if (Meteor.isServer) {
             snippet: link.description,
             htmllink:link.href,
             numberOfResults:result
-            
+
           };
           self.added('results', Random.id(), doc);
       }
