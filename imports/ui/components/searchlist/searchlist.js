@@ -26,11 +26,16 @@ Results = new Mongo.Collection('results');
 // });
  
 class SearchList {
-    constructor($scope, $reactive) {
+    constructor($scope, $reactive,$state) {
     'ngInject';
 
     $reactive(this).attach($scope);
+    $scope.$state = $state;
+
     this.query = {};
+    this.query.value=$state.params.shouyeQuery;
+    // console.log($state);
+    console.log($state.params.shouyeQuery);
     Session.setDefault('searching', false);
     this.perPage = 10;
     this.realCount=0;
@@ -86,7 +91,7 @@ class SearchList {
         //   return Results.findOne().numberOfResults;
         // }
         // return (Results.findOne() === undefined) ? 0 : Results.findOne().numberOfResults;
-        return (Results.findOne() === undefined) ? 0 : (this.perPage*10);
+        return (Results.findOne() === undefined) ? 0 : (this.perPage*20);
       },
     });
   }
@@ -94,7 +99,7 @@ class SearchList {
 
     this.page = newPageNumber;
     console.log(this.page);
-    var searchHandle = Meteor.subscribe('googleSearch', this.query.value,((this.getReactively('page')-1 ===　0)?1:this.getReactively('page')-1)* this.perPage);
+    var searchHandle = Meteor.subscribe('googleResultSearch', this.query.value,((this.getReactively('page')-1 ===　0)?1:this.getReactively('page')-1)* this.perPage);
     Session.set('searching', ! searchHandle.ready());
 
 
@@ -108,9 +113,9 @@ class SearchList {
     console.log('submit:', this.query.value);
      // this.query.owner = Meteor.user()._id;
     this.page=1;
-    // var searchHandle = Meteor.subscribe('googleSearch', this.query.value);
     console.log((this.getReactively('page')) * this.perPage);
-    var searchHandle = Meteor.subscribe('googleSearch', this.query.value,this.page);
+    
+    var searchHandle = Meteor.subscribe('googleResultSearch', this.query.value,this.page);
     Session.set('searching', ! searchHandle.ready());
     // 不reset应该会在搜索box里面显示原来搜索的数据
     // this.reset();
@@ -149,7 +154,10 @@ function config($stateProvider,$urlRouterProvider) {
   $stateProvider
     .state('searchlist', {
       url: '/searchlist',
-      template: '<searchlist></searchlist>'
+      template: '<searchlist></searchlist>',
+      params:{
+        shouyeQuery:''
+      }
    });
   // $urlRouterProvider.deferIntercept();
 }

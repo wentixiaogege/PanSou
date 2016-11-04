@@ -35,7 +35,13 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="input-group">
-          <input type="text" class="form-control" id="focuseonload" autofocus ng-model="shouye.query.value" ng-change="$state.go('searchlist')" ui-sref="searchlist()">
+        <!-- 
+         ng-change="$state.go('searchlist')" : 内容显示在上面时候才会跳转，不过内容不再存在啊到了新的页面
+         ui-sref="searchlist():  用户点击时候跳转
+
+          -->
+        <input type="text" class="form-control" id="focuseonload" autofocus ng-model="shouye.query.value" ng-change="$state.go('searchlist',{shouyeQuery:shouye.query.value})">
+          <!-- <input type="text" class="form-control" id="focuseonload" autofocus ng-model="shouye.query.value" onkeypress="$state.go('searchlist')" ng-keydown="$state.go('searchlist')" ng-change="$state.go('searchlist')" ui-sref="searchlist()"> -->
            <!-- <input type="text" autofocus  id="focuseonload" class="form-control" ng-model="shouye.query.value" ng-change="$state.go('searchlist')"> -->
 
           <span class="input-group-btn">

@@ -5,7 +5,7 @@
       <div id="custom-search-input">
 
           <div class="input-group col-md-10">
-              <input type="text" autofocus style="margin-bottom:16px;  " class=" search-query form-control" ng-model="searchlist.query.value" placeholder="Search" ng-keyup="$event.keyCode == 13 && searchlist.submit()" />
+              <input type="text" id="focuseonload" autofocus style="margin-bottom:16px;  " class=" search-query form-control" ng-model="searchlist.query.value" placeholder="Search" ng-keyup="$event.keyCode == 13 && searchlist.submit()" />
               <span class="input-group-btn" style="margin-bottom:17px;  ">
                   <button ng-click="searchlist.submit()" class="btn btn-success" type="button">
                       <span class="glyphicon glyphicon-search"></span>

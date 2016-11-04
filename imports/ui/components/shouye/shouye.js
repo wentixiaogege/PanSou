@@ -19,8 +19,11 @@ class ShouYe {
     $scope.$state = $state;
 
     this.query={};
-
+   
     angular.element('#focuseonload').focus();
+    
+    // Session.set('shouyeQuery', this.query.value);
+
   }
   // submit() {
   // 	 console.log('submit:', this.party);
