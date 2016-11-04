@@ -85,6 +85,7 @@ if (Meteor.isServer) {
       console.log(Random.choice(user_agent_list));
       var reg='<div class="sd" id="resultStats">';
       // console.log($(res.body).find('resultStats'));
+      console.log(res);
        while (match = regex.exec(res.body))
         {
           console.log("while inside");
@@ -93,7 +94,7 @@ if (Meteor.isServer) {
      console.log(result);// Page 4 of about 673 results
       for (var i = 0; i < res.links.length; ++i) {
         var link = res.links[i];
-        console.log(link.title + ' - ' + link.href)
+        // console.log(link.title + ' - ' + link.href)
         // console.log(link.description + "\n")
         var doc = {
             // thumb: item.imageLinks.smallThumbnail,

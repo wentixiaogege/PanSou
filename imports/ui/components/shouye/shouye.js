@@ -35,9 +35,6 @@ class ShouYe {
   // reset() {
   //   this.party = {};
   // }
-  redirectTo(){
-    // console.log("1");
-  }
 }
  
 const name = 'shouye';
