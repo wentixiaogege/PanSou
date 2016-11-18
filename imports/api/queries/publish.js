@@ -129,7 +129,7 @@ if (Meteor.isServer) {
     return;
   }
   // console.log('https://www.googleapis.com/customsearch/v1?key=AIzaSyDt08fOrrEJ0Fk_UfV73hZ0fcsi8WObqRk&cx=011952721200530379099:fcu7kak7rc0&num=10&start='+start+'&q='+query);
-  url = "https://api.cognitive.microsoft.com/bing/v5.0/search?q="+encodeURI("java编程")+"&count=10&offset=0&mkt=en-us&safesearch=Moderate";
+  url = "https://api.cognitive.microsoft.com/bing/v5.0/search?q="+encodeURI("site:pan.baidu.com "+query+"")+"&count=10&offset="+start+"&mkt=en-us&safesearch=Moderate";
     console.log(url);
     var self = this;
     try {
@@ -168,20 +168,25 @@ if (Meteor.isServer) {
        
     }, function (err, res,body) {
       console.log(res.body);
-      // var responseData = JSON.parse(res.body);
+      var responseData = JSON.parse(res.body);
       // console.log(responseData.webPages.value.length);
       //   console.log(responseData.searchInformation.searchTime);
       //   // console.log(typeof(JSON.parse(res.body)));
-      //   _.each(responseData.items, function(item) {
-      //     var doc = {
-      //       // thumb: item.imageLinks.smallThumbnail,
-      //       title: item.title,
-      //       link: item.link,
-      //       snippet: item.snippet,
-      //       htmllink:item.link
-      //     };
-      //     self.added('results', Random.id(), doc);
-      //   });
+      if (responseData.webPages.value == undefined) {
+
+         throw new Meteor.Error(500, 'Error 500: Not found', 'the document is not found');
+
+      }
+        _.each(responseData.webPages.value, function(item) {
+          var doc = {
+            // thumb: item.imageLinks.smallThumbnail,
+            title: item.name,
+            link: item.url,
+            snippet: item.snippet,
+            htmllink:item.displayUrl
+          };
+          self.added('results', Random.id(), doc);
+        });
     });
   } catch(error) {
       console.log(error);

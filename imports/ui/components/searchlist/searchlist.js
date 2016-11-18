@@ -99,7 +99,7 @@ class SearchList {
 
     this.page = newPageNumber;
     console.log(this.page);
-    var searchHandle = Meteor.subscribe('googleResultSearch', this.query.value,((this.getReactively('page')-1 ===　0)?1:this.getReactively('page')-1)* this.perPage);
+    var searchHandle = Meteor.subscribe('bingSearch', this.query.value,((this.getReactively('page')-1 ===　0)?1:this.getReactively('page')-1)* this.perPage);
     Session.set('searching', ! searchHandle.ready());
 
 
@@ -115,7 +115,7 @@ class SearchList {
     this.page=1;
     console.log((this.getReactively('page')) * this.perPage);
     
-    var searchHandle = Meteor.subscribe('googleResultSearch', this.query.value,this.page);
+    var searchHandle = Meteor.subscribe('bingSearch', this.query.value,this.page);
     Session.set('searching', ! searchHandle.ready());
     // 不reset应该会在搜索box里面显示原来搜索的数据
     // this.reset();
