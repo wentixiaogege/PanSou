@@ -1,5 +1,5 @@
 {
   "public": {
-
+	DISABLE_WEBSOCKETS=1
   }
 }

@@ -32,7 +32,8 @@ module.exports = {
     },
     env: {
       ROOT_URL: 'http://www.wentixiaogege.com',
-      MONGO_URL: 'mongodb://localhost/meteor'
+      MONGO_URL: 'mongodb://localhost/meteor',
+	  DISABLE_WEBSOCKETS: 1
     },
 
     //dockerImage: 'kadirahq/meteord'
