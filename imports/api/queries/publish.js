@@ -172,21 +172,25 @@ if (Meteor.isServer) {
       // console.log(responseData.webPages.value.length);
       //   console.log(responseData.searchInformation.searchTime);
       //   // console.log(typeof(JSON.parse(res.body)));
-      if (responseData.webPages.value == undefined) {
-
-         throw new Meteor.Error(500, 'Error 500: Not found', 'the document is not found');
-
+	  if (responseData.webPages == undefined) {
+		  responseData.webPages={};
+		  responseData.webPages.value=[];
+		  //throw new Meteor.Error(500, 'Error 500: Not found', 'the document is not found');
+      }else if (responseData.webPages.value == undefined) {
+		  responseData.webPages.value=[];
+         //throw new Meteor.Error(500, 'Error 500: Not found', 'the document is not found');
       }
-        _.each(responseData.webPages.value, function(item) {
-          var doc = {
-            // thumb: item.imageLinks.smallThumbnail,
-            title: item.name,
-            link: item.url,
-            snippet: item.snippet,
-            htmllink:item.displayUrl
-          };
-          self.added('results', Random.id(), doc);
-        });
+		_.each(responseData.webPages.value, function(item) {
+			  var doc = {
+				// thumb: item.imageLinks.smallThumbnail,
+				title: item.name,
+				link: item.url,
+				snippet: item.snippet,
+				htmllink:item.displayUrl
+			  };
+			  self.added('results', Random.id(), doc);
+			});
+		
     });
   } catch(error) {
       console.log(error);
