@@ -167,7 +167,7 @@ if (Meteor.isServer) {
                   'Content-Type': 'text/plain;charset=utf-8' },
        
     }, function (err, res,body) {
-      console.log(res.body);
+      // console.log(res.body);
       var responseData = JSON.parse(res.body);
       // console.log(responseData.webPages.value.length);
       //   console.log(responseData.searchInformation.searchTime);

@@ -1,13 +1,17 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="row">
-      <a ui-sref="shouye" class="navbar-left"><img src="./images/baidu.png" width="100" height="45" style="margin-top: -10px"></a>
+<!--         <img src="./images/baidu.png" width="100" height="45" style="margin-top: -10px">
+ -->      
+      <a ui-sref="shouye" class="navbar-left"><img src="./images/pansou.svg" width="100" height="45" style="margin-top: -10px"></a>
       <div id="custom-search-input">
 
           <div class="input-group col-md-10">
               <input type="text" id="focuseonload" autofocus style="margin-bottom:16px;  " class=" search-query form-control" ng-model="searchlist.query.value" placeholder="Search" ng-keyup="$event.keyCode == 13 && searchlist.submit()" />
               <span class="input-group-btn" style="margin-bottom:17px;  ">
+              <!-- <img src="./images/search.png" > -->
                   <button ng-click="searchlist.submit()" class="btn btn-success" type="button">
+                      
                       <span class="glyphicon glyphicon-search"></span>
                   </button>
               </span>
@@ -73,6 +77,17 @@
    </section>
 
     <section class="col-md-6 ">
+<!-- <script type="application/javascript" ng-lazy-load="http://xxa.zgcanglong.com/page/s.php?s=1602&w=728&h=90"></script>--><!-- not working -->
+<!-- <ngInclude src="http://xxa.zgcanglong.com/page/s.php?s=1602&w=728&h=90">  </ngInclude>--><!-- not working -->
+<div lazy-load ><p>not working </p></div> 
+
+<lazy-load></lazy-load>
+<!--    <div ng-controller="angularLoad">  
+<div data-ng-init="loadScript('http://xxa.zgcanglong.com/page/s.php?s=1602&w=728&h=90')" >
+</div>   --><!-- not working -->
+
+
+  
      <p ng-if="searchlist.resultsCount">
       <!-- <p ng-if="searchlist.results.count">  col-md-offset-5-->
      <!--  <li ng-repeat="item in searchlist.results">{{item.title}}</li>
@@ -81,8 +96,18 @@
      
          <article class="search-result row">
           <div class="col-md-11 excerpet">
-            <a href="" style="font-size:16px;color:#1f4fcd;text-decoration:underline;" target="_blank">广告名字（static就行啦）</a>
-              <p style="font-size:14px;max-width=200px; word-wrap:break-word;">广告图片</p>
+
+           
+ <!-- <script type="application/javascript" ng-src="http://xxa.zgcanglong.com/page/s.php?s=1602&w=728&h=90?render=explicit&onload=vcRecaptchaApiLoaded"></script> -->
+
+         <!--  <script type="text/javascript-lazy" src="http://xxa.zgcanglong.com/page/s.php?s=1602&w=728&h=90"> </script> -->
+
+<!--             <script src="http://y.xm9178.com/fw.html/7592/1/"></script>
+ -->            
+ <!-- <a href="http://xxa.zgcanglong.com/iclk/?zoneid=1596&uid=2742" style="font-size:16px;color:#1f4fcd;text-decoration:underline;" target="_blank">广告在这里</a>
+ad -->
+
+              <!-- <p style="font-size:14px;max-width=200px; word-wrap:break-word;">广告图片</p> -->
           </div>
         </article>
 

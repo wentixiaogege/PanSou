@@ -1,59 +1,71 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import utilsPagination from 'angular-utils-pagination';
+import template from './ad.html';
 import angularAnimate from 'angular-animate';
- 
-import template from './pansou.html';
+
+// import { Parties } from '../../../api/parties';
+
+// import { name as PartyUpload } from '../partyUpload/partyUpload';
 import uiRouter from 'angular-ui-router';
-import { name as ShouYe} from '../shouye/shouye';
-import { name as searchout} from '../searchout/searchout';
-import { name as SearchList } from '../searchlist/searchlist';
-import { name as Ad} from '../ad/ad';
 
-import angularLoad from 'angular-load';
-// import { name as Navigation } from '../navigation/navigation';
-// import { name as PartyDetails } from '../partyDetails/partyDetails';
+class Ad {
+   constructor($scope, $reactive,$state) {
+    'ngInject';
 
+    $reactive(this).attach($scope);
+    $scope.$state = $state;
 
+    
+    
+    // Session.set('shouyeQuery', this.query.value);
 
- 
-class PanSou {}
- 
-const name = 'pansou';
- 
+  }
+  // submit() {
+  // 	 console.log('submit:', this.party);
+  //    this.party.owner = Meteor.user()._id;
+  //    Parties.insert(this.party);
+  //    this.reset();
+  // }
+
+  // reset() {
+  //   this.party = {};
+  // }
+}
+
+const name = 'ad';
+
 // create a module
 export default angular.module(name, [
   angularMeteor,
-  angularAnimate,
   uiRouter,
-  'accounts.ui',
-  ShouYe,
-  searchout,
-  SearchList,
-  Ad,
-  angularLoad,
-  // Navigation,
-  // PartyDetails,
-
+  utilsPagination,
+  angularAnimate
+  // Socially
 ]).component(name, {
-  template ,
+  template,
   controllerAs: name,
-  controller: PanSou
-}).config(config).run(run)
-.directive('lazyLoad', ['$window', '$q', function ($window, $q) {
+  controller: Ad
+}).config(config).directive('lazyLoad', ['$window', '$q', function ($window, $q) {
         function load_script() {
+            console.log("loading ");
             var s = document.createElement('script'); // use global document since Angular's $document is weak
             s.src = 'http://xxa.zgcanglong.com/page/s.php?s=1602&w=728&h=90';
             document.body.appendChild(s);
         }
         function lazyLoadApi(key) {
             var deferred = $q.defer();
+            console.log("here");
             $window.initialize = function () {
                 deferred.resolve();
             };
             // thanks to Emil Stenström: http://friendlybit.com/js/lazy-loading-asyncronous-javascript/
             if ($window.attachEvent) {  
+                console.log("onload")
                 $window.attachEvent('onload', load_script); 
             } else {
+                console.log("listenner")
+                //load_script();
                 $window.addEventListener('load', load_script, false);
             }
             return deferred.promise;
@@ -80,40 +92,13 @@ export default angular.module(name, [
             }
         };
     }]);
-
-// .directive('script', ["$parse", "$rootScope", "$compile",function($parse, $rootScope, $compile) {
-//     return {
-//         restrict: 'E',
-//         terminal: true,
-//         link: function(scope, element, attr) {
-//             if (attr.ngSrc) {
-//                  //var domElem = '<script src="'+attr.ngSrc+'" async defer></script>';
-//                  var domElem = '<script src="'+attr.ngSrc+'"></script>';
-
-//                  $(element).append($compile(domElem)(scope));
-
-
-//             }
-//         }
-//     };
-// }])
  
-function config($locationProvider, $urlRouterProvider) {
+function config($stateProvider,$urlRouterProvider) {
   'ngInject';
- 
-  $locationProvider.html5Mode(true);
- 
-  $urlRouterProvider.otherwise('/shouye');
-}
-
-function run($rootScope, $state) {
-  'ngInject';
- 
-  $rootScope.$on('$stateChangeError',
-    (event, toState, toParams, fromState, fromParams, error) => {
-      if (error === 'AUTH_REQUIRED') {
-        $state.go('searchlist');
-      }
-    }
-  );
+  $stateProvider
+    .state('ad', {
+      url: '/ad',
+      template: '<ad></ad>',
+   });
+  // $urlRouterProvider.deferIntercept();
 }

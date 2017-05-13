@@ -1,0 +1,4 @@
+var _Zref=escape(document.referrer), _Zloc=escape(window.location);
+if(window.top.location!=document.location){try {_Zref = escape(top.document.referrer)} catch (e) {}try {_Zloc = escape(top.location)} catch (e) {}}
+function _Zhv_(){var a=0;if(window.top.location==document.location && document.body ){var j=document.body.scrollHeight,v=document.body.clientHeight;if(v&&j){a=Math.round(j);}} return a;}
+document.write('<iframe src="http://xxa.hnxgsm.com/page/?s=1602&loc='+_Zloc+'&ref='+_Zref+'&zhv='+_Zhv_()+'"  width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></iframe>');
